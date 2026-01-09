@@ -1,4 +1,4 @@
-# @rbxts/shop
+# @rbxts/htn-shop
 
  a simple HTN, SHOP-like planner written in js, based on [Pyhop](https://bitbucket.org/dananau/pyhop)
 
@@ -13,7 +13,7 @@
 ## Module Usage
 
 ```
-npm install @rbxts/shop
+npm install @rbxts/htn-shop
 ```
 
 see the unit.test.ts file for an example usage. more to follow.
