@@ -7,27 +7,12 @@ export function create<S extends State>(): Planner<S> {
 	const taskMethods: TaskMethods<S> = {} as TaskMethods<S>;
 
 	return {
-		operators: (toAdd: Operators<S>) => addOperators(operators, toAdd),
-		setMethods: (taskName: string, methods: Method<S>[]) => setMethods(taskMethods, taskName, methods),
-		solve: (state: S, tasks: Task[]) => solve(operators, taskMethods, state, tasks),
+		operators: (toAdd: Operators<S>) => extend(operators, toAdd),
+		setMethods: (taskName: string, toAdd: Method<S>[]) => {
+			taskMethods[taskName] = toAdd;
+		},
+		solve: (state: S, tasks: Task[]) => seekPlan(operators, taskMethods, state, tasks, [], 0),
 	};
-}
-
-function addOperators<S extends State>(currentOperators: Operators<S>, toAdd: Operators<S>): void {
-	extend(currentOperators, toAdd);
-}
-
-function setMethods<S extends State>(currentTaskMethods: TaskMethods<S>, taskName: string, toAdd: Method<S>[]): void {
-	currentTaskMethods[taskName] = toAdd;
-}
-
-function solve<S extends State>(
-	operators: Operators<S>,
-	taskMethods: TaskMethods<S>,
-	state: S,
-	tasks: Task[],
-): Task[] | undefined {
-	return seekPlan(operators, taskMethods, state, tasks, [], 0);
 }
 
 function seekPlan<S extends State>(
