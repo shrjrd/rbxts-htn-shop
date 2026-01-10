@@ -1,6 +1,6 @@
 {
 	"name": "@rbxts/htn-shop",
-	"version": "1.0.2",
+	"version": "1.0.3",
 	"description": "a simple HTN SHOP-like planner",
 	"author": "shrjrd",
 	"license": "MIT",
@@ -35,10 +35,11 @@
 		"typescript": "^5.9.3"
 	},
 	"scripts": {
+		"prepack": "npm run build",
 		"build": "rbxtsc",
-		"build:dev": "rbxtsc --type game --rojo default.project.json",
+		"compile:rbxl": "rbxtsc --type game --rojo default.project.json",
 		"build:rbxl": "rojo sourcemap -o sourcemap.json && rojo build -o place.rbxl",
-		"watch": "npm run build:dev && npx concurrently \"npm run build:dev -- -w\" \"rojo serve\""
+		"watch:rbxl": "npm run compile:rbxl && npx concurrently \"npm run compile:rbxl -- -w\" \"rojo serve\""
 	},
 	"repository": {
 		"type": "git",
